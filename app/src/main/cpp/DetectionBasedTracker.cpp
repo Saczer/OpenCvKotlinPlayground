@@ -97,10 +97,8 @@ Java_pl_olszak_michal_opencvplayground_DetectionBasedTracker_nativeCreateObject
     jlong result = 0;
 
     try {
-        Ptr<CascadeDetectorAdapter> mainDetector = makePtr<CascadeDetectorAdapter>(
-                makePtr<CascadeClassifier>(stdFileName));
-        Ptr<CascadeDetectorAdapter> trackingDetector = makePtr<CascadeDetectorAdapter>(
-                makePtr<CascadeClassifier>(stdFileName));
+        Ptr<CascadeDetectorAdapter> mainDetector = makePtr<CascadeDetectorAdapter>(makePtr<CascadeClassifier>(stdFileName));
+        Ptr<CascadeDetectorAdapter> trackingDetector = makePtr<CascadeDetectorAdapter>(makePtr<CascadeClassifier>(stdFileName));
         result = (jlong) new DetectorAggregator(mainDetector, trackingDetector);
         if (faceSize > 0) {
             mainDetector->setMaxObjectSize(Size(faceSize, faceSize));

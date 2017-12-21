@@ -6,7 +6,7 @@
 cmake_minimum_required(VERSION 3.4.1)
 
 #path to opencv installation, relative to the directory of CMakeList.txt
-set(pathToOpenCV ${CMAKE_SOURCE_DIR}/../../../../OpenCV-android-sdk)
+set(pathToOpenCV C:/OpenCV-android-sdk)
 
 add_library( detection-tracker SHARED
              ${CMAKE_SOURCE_DIR}/src/main/cpp/DetectionBasedTracker.cpp )
