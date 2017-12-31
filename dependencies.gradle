@@ -1,0 +1,38 @@
+ext {
+    minSdkVersion = 16
+    targetSdkVersion = 27
+
+    appCompatVersion = '27.0.2'
+    timberVersion = '4.6.0'
+    constraintLayoutVersion = '1.0.2'
+    rxJavaVersion = '2.1.8'
+    rxAndroidVersion = '2.0.1'
+    daggerVersion = '2.14.1'
+    jUnitVersion = '4.12'
+    espressoVersion = '3.0.1'
+    testRunnerVersion = '1.0.1'
+
+    dependencies = [
+            kotlin              : "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version",
+            rxJava              : "io.reactivex.rxjava2:rxjava:$rxJavaVersion",
+            rxAndroid           : "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion",
+            constraintLayout    : "com.android.support.constraint:constraint-layout:$constraintLayoutVersion",
+            timber              : "com.jakewharton.timber:timber:$timberVersion",
+            dagger              : "com.google.dagger:dagger:$daggerVersion",
+            daggerAndroid       : "com.google.dagger:dagger-android:$daggerVersion",
+            daggerAndroidSupport: "com.google.dagger:dagger-android-support:$daggerVersion",
+            appCompat           : "com.android.support:appcompat-v7:$appCompatVersion",
+            openCV              : project(':openCV331')
+    ]
+
+    processors = [
+            daggerCompiler        : "com.google.dagger:dagger-compiler:$daggerVersion",
+            daggerAndroidProcessor: "com.google.dagger:dagger-android-processor:$daggerVersion"
+    ]
+
+    test = [
+            jUnit   : "junit:junit:$jUnitVersion",
+            runner  : "com.android.support.test:runner:$testRunnerVersion",
+            espresso: "com.android.support.test.espresso:espresso-core:$espressoVersion"
+    ]
+}

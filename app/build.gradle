@@ -4,11 +4,13 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 27
+    def global = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion global["targetSdkVersion"]
     defaultConfig {
         applicationId "pl.olszak.michal.opencvplayground"
-        minSdkVersion 16
-        targetSdkVersion 27
+        minSdkVersion global["minSdkVersion"]
+        targetSdkVersion global["targetSdkVersion"]
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -37,21 +39,25 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:27.0.2'
-    implementation 'com.jakewharton.timber:timber:4.6.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    implementation "io.reactivex.rxjava2:rxjava:2.1.8"
-    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    implementation 'com.google.dagger:dagger:2.14.1'
-    implementation 'com.google.dagger:dagger-android:2.14.1'
-    implementation 'com.google.dagger:dagger-android-support:2.14.1'
-    kapt 'com.google.dagger:dagger-compiler:2.14.1'
-    kapt 'com.google.dagger:dagger-android-processor:2.14.1'
-    implementation project(':openCV331')
+    def dependencies = rootProject.ext.dependencies
+    def testDependencies = rootProject.ext.test
+    def processors = rootProject.ext.processors
 
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation dependencies.kotlin
+    implementation dependencies.appCompat
+    implementation dependencies.timber
+    implementation dependencies.constraintLayout
+    implementation dependencies.rxJava
+    implementation dependencies.rxAndroid
+    implementation dependencies.dagger
+    implementation dependencies.daggerAndroid
+    implementation dependencies.daggerAndroidSupport
+    kapt processors.daggerCompiler
+    kapt processors.daggerAndroidProcessor
+    implementation dependencies.openCV
+
+    testImplementation testDependencies.jUnit
+    androidTestImplementation testDependencies.runner
+    androidTestImplementation testDependencies.espresso
 }
