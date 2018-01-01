@@ -31,4 +31,10 @@ abstract class SingleUseCase<T, in Params> constructor(private val schedulersFac
         disposables.add(disposable)
     }
 
+    fun dispose() {
+        if (!disposables.isDisposed) {
+            disposables.dispose()
+        }
+    }
+
 }
