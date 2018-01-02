@@ -21,11 +21,11 @@ class ScannerView @JvmOverloads constructor(
     }
 
     override fun attach(listener: ScannerDisplayer.InteractionListener) {
-        camera_view.setCvCameraViewListener(listener.provideCVCameraViewListener())
+        camera_view.enableView()
     }
 
     override fun detach(listener: ScannerDisplayer.InteractionListener) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        camera_view.disableView()
     }
 
 }

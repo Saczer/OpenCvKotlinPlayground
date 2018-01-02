@@ -1,10 +1,8 @@
 package pl.olszak.michal.opencvplayground.scanner.view
 
-import org.opencv.android.CameraBridgeViewBase
-
 /**
- * Created by molszak.
- * 01.01.2018
+ * @author molszak
+ *         created on 02.01.2018.
  */
 interface ScannerDisplayer {
 
@@ -13,8 +11,6 @@ interface ScannerDisplayer {
     fun detach(listener: InteractionListener)
 
     interface InteractionListener {
-
-        fun provideCVCameraViewListener() : CameraBridgeViewBase.CvCameraViewListener2
 
     }
 

@@ -25,7 +25,7 @@ class PermissionManager @Inject constructor() {
         }
     }
 
-    fun permissionResult(activity: Activity, requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    fun permissionResult(activity: Activity, requestCode: Int, grantResults: IntArray) {
         when (requestCode) {
             CAMERA_PERMISSION_CODE ->
                 if (grantResults.isNotEmpty()) {

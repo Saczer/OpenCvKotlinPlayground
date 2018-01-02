@@ -5,6 +5,7 @@ import android.app.Application
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
+import org.opencv.android.OpenCVLoader
 import pl.olszak.michal.opencvplayground.di.ApplicationComponent
 import pl.olszak.michal.opencvplayground.di.DaggerApplicationComponent
 import timber.log.Timber
@@ -40,5 +41,15 @@ class OpenCvPlayground : Application(), HasActivityInjector {
 
     override fun activityInjector(): AndroidInjector<Activity> {
         return dispatchingActivityInjector
+    }
+
+    companion object {
+        init {
+            if(!OpenCVLoader.initDebug()){
+                Timber.d("OpenCv did not load")
+            }else{
+                System.loadLibrary("edge_detector")
+            }
+        }
     }
 }

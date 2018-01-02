@@ -1,0 +1,14 @@
+apply plugin: 'kotlin'
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
+dependencies {
+    def coreDependencies = rootProject.ext.coreDependencies
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation coreDependencies.kotlin
+    implementation coreDependencies.rxKotlin
+    implementation coreDependencies.javaxAnnotation
+    implementation coreDependencies.javaxInject
+}

@@ -39,16 +39,18 @@ android {
 }
 
 dependencies {
-    def dependencies = rootProject.ext.dependencies
-    def testDependencies = rootProject.ext.test
-    def processors = rootProject.ext.processors
+    def dependencies = rootProject.ext.appDependencies
+    def testDependencies = rootProject.ext.appTestDependencies
+    def processors = rootProject.ext.appProcessors
+
+    implementation project(':core')
 
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation dependencies.kotlin
     implementation dependencies.appCompat
     implementation dependencies.timber
     implementation dependencies.constraintLayout
-    implementation dependencies.rxJava
+    implementation dependencies.rxKotlin
     implementation dependencies.rxAndroid
     implementation dependencies.dagger
     implementation dependencies.daggerAndroid

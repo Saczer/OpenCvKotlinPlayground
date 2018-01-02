@@ -5,16 +5,18 @@ ext {
     appCompatVersion = '27.0.2'
     timberVersion = '4.6.0'
     constraintLayoutVersion = '1.0.2'
-    rxJavaVersion = '2.1.8'
+    rxKotlinVersion = '2.2.0'
     rxAndroidVersion = '2.0.1'
     daggerVersion = '2.14.1'
     jUnitVersion = '4.12'
     espressoVersion = '3.0.1'
     testRunnerVersion = '1.0.1'
+    javaxAnnotationVersion = '1.0'
+    javaxInjectVersion = '1'
 
-    dependencies = [
+    appDependencies = [
             kotlin              : "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version",
-            rxJava              : "io.reactivex.rxjava2:rxjava:$rxJavaVersion",
+            rxKotlin            : "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion",
             rxAndroid           : "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion",
             constraintLayout    : "com.android.support.constraint:constraint-layout:$constraintLayoutVersion",
             timber              : "com.jakewharton.timber:timber:$timberVersion",
@@ -25,14 +27,21 @@ ext {
             openCV              : project(':openCV331')
     ]
 
-    processors = [
+    appProcessors = [
             daggerCompiler        : "com.google.dagger:dagger-compiler:$daggerVersion",
             daggerAndroidProcessor: "com.google.dagger:dagger-android-processor:$daggerVersion"
     ]
 
-    test = [
+    appTestDependencies = [
             jUnit   : "junit:junit:$jUnitVersion",
             runner  : "com.android.support.test:runner:$testRunnerVersion",
             espresso: "com.android.support.test.espresso:espresso-core:$espressoVersion"
+    ]
+
+    coreDependencies = [
+            kotlin         : "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version",
+            rxKotlin       : "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion",
+            javaxAnnotation: "javax.annotation:jsr250-api:$javaxAnnotationVersion",
+            javaxInject    : "javax.inject:javax.inject:$javaxInjectVersion"
     ]
 }

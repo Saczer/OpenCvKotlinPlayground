@@ -12,6 +12,6 @@ import pl.olszak.michal.opencvplayground.scanner.ScannerActivity
 abstract class ActivityBindingModule {
 
     @ContributesAndroidInjector(modules = [(ScannerActivityModule::class)])
-    abstract fun bindMainActivity(): ScannerActivity
+    abstract fun bindScannerActivity(): ScannerActivity
 
 }

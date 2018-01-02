@@ -1,5 +1,6 @@
 package pl.olszak.michal.opencvplayground.di
 
+import android.app.Application
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
@@ -23,7 +24,7 @@ interface ApplicationComponent {
     @Component.Builder
     interface Builder{
         @BindsInstance
-        fun application(application: OpenCvPlayground) : Builder
+        fun application(application: Application) : Builder
 
         fun bind() : ApplicationComponent
     }

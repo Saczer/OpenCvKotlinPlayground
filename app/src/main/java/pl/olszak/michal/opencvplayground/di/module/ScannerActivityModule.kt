@@ -3,6 +3,7 @@ package pl.olszak.michal.opencvplayground.di.module
 import dagger.Module
 import dagger.Provides
 import pl.olszak.michal.opencvplayground.concurrent.SchedulersFacade
+import pl.olszak.michal.opencvplayground.detector.EdgeDetector
 import pl.olszak.michal.opencvplayground.di.scope.PerActivity
 import pl.olszak.michal.opencvplayground.domain.interactor.scanner.ScanFrame
 import pl.olszak.michal.opencvplayground.domain.scanner.CameraFrameScanner
@@ -15,16 +16,13 @@ import pl.olszak.michal.opencvplayground.scanner.ScannerActivity
  */
 @Module
 @PerActivity
-class ScannerActivityModule{
+class ScannerActivityModule {
 
     @Provides
-    fun provideScannerActivity(activity: ScannerActivity) : ScannerActivity = activity
+    fun provideFrameScanner(frameScanner: CameraFrameScanner): FrameScanner = frameScanner
 
     @Provides
-    fun provideFrameScanner(frameScanner: CameraFrameScanner) : FrameScanner = frameScanner
-
-    @Provides
-    fun provideScaneFrame(schedulersFacade: SchedulersFacade, frameScanner: FrameScanner) : ScanFrame{
+    fun provideScaneFrame(schedulersFacade: SchedulersFacade, frameScanner: FrameScanner): ScanFrame {
         return ScanFrame(schedulersFacade, frameScanner)
     }
 
