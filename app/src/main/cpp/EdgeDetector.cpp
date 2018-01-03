@@ -38,6 +38,15 @@ inline void throwCVException(JNIEnv *jenv, Exception &ex, string method) {
     jenv->ThrowNew(je, ex.what());
 }
 
+struct contour_sorter {
+    bool operator()(const vector<Point> &a, const vector<Point> &b) {
+        Rect ra(boundingRect(a));
+        Rect rb(boundingRect(b));
+
+        return ra.area() > rb.area();
+    }
+};
+
 class EdgeDetector {
 public:
     EdgeDetector() {
@@ -46,23 +55,30 @@ public:
     }
 
     void detect(const Mat &imageRgb, const Mat &imageGray) {
-        Mat edged;
         vector<vector<Point> > contours;
         vector<Vec4i> hierarchy;
 
-        GaussianBlur(imageGray, edged, gaussianScalar, 0);
-        Canny(edged, edged, 75, 200);
+//        GaussianBlur(imageGray, edged, gaussianScalar, 0);
+        Canny(imageGray, imageGray, 100, 300);
 
         LOGD("canny processed");
 
-        findContours(edged, contours, hierarchy, CV_RETR_LIST, CV_CHAIN_APPROX_SIMPLE);
+        findContours(imageGray, contours, hierarchy, CV_RETR_LIST, CV_CHAIN_APPROX_SIMPLE);
+        sort(contours.begin(), contours.end(), contour_sorter());
+
+        vector<vector<Point> > sorted;
+        if (contours.size() > 5) {
+            sorted = vector<vector<Point> >(contours.begin(), contours.begin() + 5);
+        } else {
+            sorted = contours;
+        }
 
         LOGD("found some contours");
 
-        for (int i = 0; i < contours.size(); i++) {
-            double peri = arcLength(contours[i], true);
+        for (int i = 0; i < sorted.size(); i++) {
+            double peri = arcLength(sorted[i], true);
             vector<Point> approx;
-            approxPolyDP(contours[i], approx, 0.02 * peri, true);
+            approxPolyDP(sorted[i], approx, 0.02 * peri, true);
 
             if (approx.size() == 4) {
                 LOGD("found approx");

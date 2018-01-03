@@ -22,6 +22,6 @@ class ScannerPresenterImpl @Inject constructor() : ScannerPresenter {
     }
 
     override fun dispose() {
-
+        display?.detach(listener)
     }
 }
